@@ -1,35 +1,26 @@
+import java.util.Objects;
+
 public class Employee {
 
-    private String firstName;
-    private String secondName;
-    private String lastName;
+    private String fullName;
     private int department;
     private int salary;
-    private int id;
-    static int counter=0;
+    private final int id;
+    private static int counter=1;
 
-    Employee() {
-        id=counter++;
+   public Employee() {
+        this.id=counter++;
     }
 
-    public Employee(String firstName, String secondName, String lastName, int department, int salary) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.lastName = lastName;
+    public Employee(String fullName, int department, int salary) {
+        this.fullName = fullName;
         this.department = department;
         this.salary = salary;
+        this.id = counter++;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getFullName() {
+        return fullName;
     }
 
     public int getDepartment() {
@@ -38,6 +29,10 @@ public class Employee {
 
     public int getSalary() {
         return salary;
+    }
+
+    public int getId() {
+       return  id;
     }
 
     public void setDepartment() {
@@ -50,10 +45,21 @@ public class Employee {
 
     @Override
     public String toString() {
-        return getFirstName() + " " + getSecondName() + " " + getLastName() + " " + getDepartment() + " "
+        return getFullName() +  " " + getDepartment() + " "
                 + getSalary();
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return department == employee.department && salary == employee.salary && id == employee.id && Objects.equals(fullName, employee.fullName);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, department, salary, id);
+    }
 }
