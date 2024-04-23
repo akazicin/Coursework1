@@ -35,11 +35,11 @@ public class Employee {
        return  id;
     }
 
-    public void setDepartment() {
+    public void setDepartment(int department) {
         this.department=department;
     }
 
-    public void setSalary() {
+    public void setSalary(int salary) {
         this.salary=salary;
     }
 
